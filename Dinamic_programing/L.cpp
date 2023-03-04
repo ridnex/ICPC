@@ -22,7 +22,4 @@ int main(){
         }
     }
     cout << dp[n];
-    // for(int i=1; i<5000; i++){
-    //     cout <<i << " " << dp[i]<< endl;
-    // }
 }
