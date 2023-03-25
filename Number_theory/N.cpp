@@ -21,22 +21,15 @@ long long Euler(long long n){
 int main(){
     int m;
     cin >> m;
+    long long arr[10005];
+    arr[1]=1;
+    for(long long i=2; i<=10000; i++){
+            arr[i] = arr[i-1] + Euler(i);
+    }
     for(int j=0; j<m; j++){
         long long n, cnt=1;
         cin >> n;
-        vector <long long> u(n+1, 0);
-        for(long long i=2; i<n+1; i++){
-            if(u[i]==0){
-                for(long long j=(i)*(i); j<n+1;j+=(i) ){
-                    u[j]=1;   
-                }
-                cnt += i-1;
-            }
-            else{
-                cnt += Euler(i);
-            }  
-        }
-        cout << cnt*cnt<<endl;
+        cout << arr[n]*arr[n]<<endl;
 
     }
     

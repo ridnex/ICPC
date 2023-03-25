@@ -1,26 +1,47 @@
 #include <iostream>
 using namespace std;
-long long binpow(long long a, long long n, long long c){
-    if(n==0){
-        return 1;
-    }
-    if(n==1){
-        return a%c;
-    }
-    long long x = binpow(a%c, n/2, c)%c;
-    if(n%2==0){
-        return x*x;
-    }
-    else{
-        return (a%c)*x*x;
-    }
-}
-int main(){
-    long long a, b, c;
-    while (cin >> a >> b>> c) {
-        
-        cout << binpow(a, b, c)%c<<endl;
-        
-    }
+unsigned long long  a, b, c;
 
+unsigned long long bin_pow_sum(unsigned long long a, unsigned long long b) {
+    if (b == 0){
+        return 0;
+    }
+    if (b == 1){
+        return a % c;
+    }
+    unsigned long long x;
+    if (b % 2 == 0) {
+        x = bin_pow_sum(a, b / 2) % c;
+        return (x + x) % c;
+    }
+    
+    x = bin_pow_sum(a, b / 2) % c;
+    return (x + x + a) % c;
+      
+    
+}
+
+unsigned long long bin_pow_deg(unsigned long long a, unsigned long long b) {
+    if(b == 0){
+        return 0;
+    }
+    if(b == 1){
+        return a % c;
+    }
+    unsigned long long x;
+    if(b % 2 == 0) {
+        x = bin_pow_deg(a % c, b / 2) % c;
+        return bin_pow_sum(x, x) % c;
+    }
+    
+    x = bin_pow_deg(a% c, b / 2) % c;
+    return bin_pow_sum(bin_pow_sum(x, x) % c, a % c)%c;
+    
+    
+}
+
+int main() {
+    while (cin >> a >> b >> c) {
+        cout << bin_pow_deg(a, b) % c << endl;
+    }
 }
